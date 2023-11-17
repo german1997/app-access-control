@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-sql-driver/mysql"
@@ -22,7 +23,7 @@ func main() {
 	// define the routes
 	r.GET("/user/:id", GetTeacherHandler)
 
-	err := r.Run(":8080")
+	err := r.Run(checkPort())
 
 	if err != nil {
 		log.Fatalf("impossible to start server: %s", err)
@@ -94,4 +95,15 @@ type User struct {
 	FirstName string `json:"first_name"`
 	LastName  string `json:"last_name"`
 	Rut       string `json:"rut"`
+}
+
+func checkPort() string {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":3000"
+	} else {
+		port = ":" + port
+	}
+
+	return port
 }
