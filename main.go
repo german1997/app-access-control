@@ -17,7 +17,7 @@ var db *sql.DB
 func main() {
 
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"https://web-access-control-production.up.railway.app", "http://127.0.0.1:5500/"}
+	config.AllowOrigins = []string{"https://web-access-control-production.up.railway.app", "http://127.0.0.1:5500"}
 
 	DBConnection()
 
