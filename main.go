@@ -16,16 +16,16 @@ var db *sql.DB
 
 func main() {
 
-	DBConnection()
-
-	r := gin.Default()
-
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"https://web-access-control-production.up.railway.app"}
 
+	DBConnection()
+
+	r := gin.Default()
+	r.Use(cors.New(config))
+
 	r.GET("/user/:id", GetTeacherHandler)
 
-	r.Use(cors.New(config))
 	err := r.Run(checkPort())
 
 	if err != nil {
