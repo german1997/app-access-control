@@ -22,7 +22,7 @@ func main() {
 	r := gin.Default()
 	corsConfig := cors.DefaultConfig()
 
-	corsConfig.AllowOrigins = []string{"https://app-access-control-production.up.railway.app"}
+	corsConfig.AllowOrigins = []string{"https://app-access-control-production.up.railway.app", "http://127.0.0.1:5500"}
 	corsConfig.AllowCredentials = true
 	corsConfig.AddAllowMethods("OPTIONS")
 	r.Use(cors.New(corsConfig))
