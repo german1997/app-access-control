@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/gin-contrib/cors"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-sql-driver/mysql"
-	_ "github.com/go-sql-driver/mysql"
 )
 
 var db *sql.DB
@@ -19,6 +20,12 @@ func main() {
 	DBConnection()
 
 	r := gin.Default()
+	corsConfig := cors.DefaultConfig()
+
+	corsConfig.AllowOrigins = []string{"https://app-access-control-production.up.railway.app"}
+	corsConfig.AllowCredentials = true
+	corsConfig.AddAllowMethods("OPTIONS")
+	r.Use(cors.New(corsConfig))
 
 	// define the routes
 	r.GET("/user/:id", GetTeacherHandler)
